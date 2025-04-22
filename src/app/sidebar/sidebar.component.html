@@ -9,6 +9,7 @@
       <ng-container *ngFor="let item of menuItems">
         <li class="sidebar-menu-item">
           <a
+            routerLink="{{item.link}}"
             class="sidebar-item"
             [ngClass]="{
               'has-children': item.children,
@@ -17,9 +18,10 @@
             (click)="toggleMenuItem(item)"
           >
             <i [class]="item.icon"></i>
-            <span class="sidebar-item-text">{{ item.label }}</span>
+            <a class="sidebar-item-text" >{{ item.label }} </a>
             <i
               *ngIf="item.children && !isSidebarCollapsed"
+              style="margin-right: 40px"
               class="fas fa-chevron-down sidebar-item-arrow"
               [ngClass]="{ rotated: item.isOpen }"
             ></i>
@@ -30,9 +32,9 @@
             class="sidebar-submenu"
           >
             <li *ngFor="let child of item.children">
-              <a class="sidebar-item sidebar-subitem">
+              <a class="sidebar-item sidebar-subitem" routerLink="{{child.link}}">
                 <i [class]="child.icon"></i>
-                <span class="sidebar-item-text">{{ child.label }}</span>
+                <a class="sidebar-item-text" (click)="closeSideNav()">{{ child.label }}</a>
               </a>
             </li>
           </ul>
